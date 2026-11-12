@@ -13,7 +13,7 @@ Back-end do [TrampoIA](https://github.com/diegopeon/TRAMPO-IA-). Aqui fica só o
 ## O que falta
 
 - [ ] Chave da API da Anthropic e colocar no `.env` (veja o `.env.example`)
-- [x] Hospedar o servidor no Railway (link: *em breve*)
+- [x] Hospedar o servidor no Railway: https://trampoia-api-production.up.railway.app (teste: [`/api/saude`](https://trampoia-api-production.up.railway.app/api/saude))
 - [ ] Endereço do servidor e colocar o endereço do front em `CORS_ORIGEM`
 - [ ] Ajustar a lista de palavras do filtro depois do teste na oficina (`server/filtro.js`)
 
