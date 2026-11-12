@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Monte seu primeiro currículo de graça, contando o que você já fez com as suas palavras.">
+  <meta name="theme-color" content="#14365f">
+  <!-- Endereço da API quando o front roda em outro servidor, sem barra no fim. Vazio usa o mesmo endereço da página. -->
+  <meta name="trampoia-api" content="">
+  <title>TrampoIA</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2314365f'/%3E%3Cpath d='M9 10h14v4h-5v11h-4V14H9z' fill='%23ffc53d'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="estilo.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="barra">
+    <div class="miolo barra-miolo">
+      <span class="logo" aria-label="TrampoIA">Trampo<b>IA</b></span>
+      <span class="selo">grátis pra sempre</span>
+    </div>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- RF01, RN02, RN17: apresentação e aviso de privacidade -->
+    <section id="tela-inicio" class="tela" aria-labelledby="titulo-inicio">
+      <div class="hero">
+        <div class="miolo">
+          <p class="chamada">Jovem Aprendiz · Estágio · Primeiro emprego</p>
+          <h1 id="titulo-inicio">Você já fez muita coisa. A gente ajuda a <span class="destaque-texto">contar</span>.</h1>
+          <p class="hero-texto">Conta do seu jeito o que você já viveu: o bico, a ajuda no comércio da família, o projeto na comunidade. O TrampoIA transforma isso em currículo e ainda te prepara para a entrevista.</p>
+
+          <div class="antes-depois" role="group" aria-label="Exemplo de como o TrampoIA reescreve um relato">
+            <figure class="balao">
+              <figcaption>Do jeito que você fala</figcaption>
+              <blockquote>ajudo minha tia no salão, atendo as clientes e marco horário no zap</blockquote>
+            </figure>
+            <svg class="seta" viewBox="0 0 64 40" aria-hidden="true"><path d="M4 22c14-14 34-14 48-2" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M44 10l10 10-13 5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <figure class="ficha">
+              <figcaption>Do jeito que o RH lê</figcaption>
+              <p><strong>Apoio em salão de beleza familiar</strong>Atendimento a clientes e agendamento de horários por WhatsApp.</p>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="miolo">
+        <ol class="como">
+          <li><span class="num">1</span><p><strong>Você conta</strong> o que já fez, com as suas palavras.</p></li>
+          <li><span class="num">2</span><p><strong>A IA organiza</strong> em linguagem de currículo, sem acrescentar o que você não contou.</p></li>
+          <li><span class="num">3</span><p><strong>Você confere</strong>, corrige o que quiser e baixa o PDF.</p></li>
+        </ol>
+
+        <div class="cartao aviso">
+          <h2>Antes de começar</h2>
+          <ul class="lista-aviso">
+            <li>O que você escrever é enviado para uma inteligência artificial da empresa Anthropic. <strong>Seu nome e seu contato não vão para a IA.</strong></li>
+            <li>O TrampoIA não guarda nada: fechou a página, apagou. A Anthropic apaga em até 30 dias (ou guarda por mais tempo se o texto violar as regras de uso dela).</li>
+            <li>Não escreva CPF, RG, endereço ou informações de saúde.</li>
+            <li><strong>Tem menos de 18 anos?</strong> Mostre esta página para seu responsável ou use na oficina.</li>
+          </ul>
+          <label class="marcar">
+            <input type="checkbox" id="aceite" aria-describedby="aceite-erro">
+            <span>Li e quero continuar</span>
+          </label>
+          <p class="erro" id="aceite-erro" aria-live="polite"></p>
+          <button type="button" class="botao principal" id="continuar">Bora montar meu currículo</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RF02, RF03: formulário em três passos curtos -->
+    <form id="tela-form" class="tela" hidden novalidate>
+      <div class="miolo">
+        <div class="progresso">
+          <p class="progresso-texto" id="progresso-texto" aria-live="polite">Passo 1 de 3 · Seus dados</p>
+          <ol class="progresso-barra" aria-hidden="true"><li></li><li></li><li></li></ol>
+        </div>
+
+        <fieldset class="passo" data-passo="0">
+          <legend><h1>Quem é você?</h1></legend>
+          <p class="nota-cadeado">Esses dados ficam no seu celular e só aparecem no PDF. Não vão para a IA.</p>
+          <div class="campo">
+            <label for="nome">Nome completo</label>
+            <input id="nome" name="nome" autocomplete="name" maxlength="80" aria-describedby="nome-erro">
+            <p class="erro" id="nome-erro"></p>
+          </div>
+          <div class="campo">
+            <label for="telefone">Telefone com DDD</label>
+            <input id="telefone" name="telefone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(71) 99999-9999" aria-describedby="telefone-dica telefone-erro">
+            <p class="dica" id="telefone-dica">Coloque telefone, e-mail ou os dois.</p>
+            <p class="erro" id="telefone-erro"></p>
+          </div>
+          <div class="campo">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="120" aria-describedby="email-erro">
+            <p class="erro" id="email-erro"></p>
+          </div>
+          <div class="dupla">
+            <div class="campo">
+              <label for="cidade">Cidade</label>
+              <input id="cidade" name="cidade" autocomplete="address-level2" maxlength="60" value="Salvador/BA" aria-describedby="cidade-erro">
+              <p class="erro" id="cidade-erro"></p>
+            </div>
+            <div class="campo curto">
+              <label for="idade">Idade <span class="opcional">opcional</span></label>
+              <input id="idade" name="idade" inputmode="numeric" maxlength="2" aria-describedby="idade-erro">
+              <p class="erro" id="idade-erro"></p>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="passo" data-passo="1" hidden>
+          <legend><h1>Onde você estuda?</h1></legend>
+          <fieldset class="grupo" id="nivel" aria-describedby="nivel-erro">
+            <legend>Escolaridade</legend>
+            <div class="pilulas">
+              <label class="pilula"><input type="radio" name="nivel" value="fundamental"><span>Fundamental</span></label>
+              <label class="pilula"><input type="radio" name="nivel" value="medio"><span>Ensino médio</span></label>
+              <label class="pilula"><input type="radio" name="nivel" value="tecnico"><span>Técnico</span></label>
+              <label class="pilula"><input type="radio" name="nivel" value="superior"><span>Faculdade</span></label>
+            </div>
+            <p class="erro" id="nivel-erro"></p>
+          </fieldset>
+          <fieldset class="grupo" id="situacao" aria-describedby="situacao-erro">
+            <legend>Situação</legend>
+            <div class="pilulas">
+              <label class="pilula"><input type="radio" name="situacao" value="cursando"><span>Estou cursando</span></label>
+              <label class="pilula"><input type="radio" name="situacao" value="concluido"><span>Já concluí</span></label>
+              <label class="pilula"><input type="radio" name="situacao" value="interrompido"><span>Parei de estudar</span></label>
+            </div>
+            <p class="erro" id="situacao-erro"></p>
+          </fieldset>
+          <div class="campo">
+            <label for="escola">Nome da escola</label>
+            <input id="escola" name="escola" maxlength="100" placeholder="Colégio Estadual..." aria-describedby="escola-erro">
+            <p class="erro" id="escola-erro"></p>
+          </div>
+          <div class="campo curto">
+            <label for="previsao">Ano em que terminou ou vai terminar <span class="opcional">opcional</span></label>
+            <input id="previsao" name="previsao" inputmode="numeric" maxlength="4" placeholder="2027" aria-describedby="previsao-erro">
+            <p class="erro" id="previsao-erro"></p>
+          </div>
+        </fieldset>
+
+        <fieldset class="passo" data-passo="2" hidden>
+          <legend><h1>Agora, a sua história</h1></legend>
+          <p class="nota">Escreva como falaria com um amigo, sem se preocupar com palavra bonita. Isso é com a gente.</p>
+          <fieldset class="grupo" id="vaga" aria-describedby="vaga-erro">
+            <legend>Que vaga você procura?</legend>
+            <div class="cartoes-vaga">
+              <label class="vaga"><input type="radio" name="vaga" value="jovem_aprendiz"><span><strong>Jovem Aprendiz</strong>trabalho com curso de formação</span></label>
+              <label class="vaga"><input type="radio" name="vaga" value="estagio"><span><strong>Estágio</strong>enquanto você estuda</span></label>
+              <label class="vaga"><input type="radio" name="vaga" value="primeiro_emprego"><span><strong>Primeiro emprego</strong>de carteira assinada</span></label>
+            </div>
+            <p class="erro" id="vaga-erro"></p>
+          </fieldset>
+          <div class="campo">
+            <label for="objetivo">Em que você gostaria de trabalhar?</label>
+            <p class="exemplo" id="objetivo-ex">Quero trabalhar em escritório, ajudando na parte administrativa.</p>
+            <textarea id="objetivo" name="objetivo" rows="2" maxlength="300" aria-describedby="objetivo-ex objetivo-erro"></textarea>
+            <p class="contador" id="objetivo-conta" aria-hidden="true"></p>
+            <p class="erro" id="objetivo-erro"></p>
+          </div>
+          <div class="campo">
+            <label for="vivencias">O que você já fez, mesmo sem carteira assinada?</label>
+            <p class="exemplo" id="vivencias-ex">Ajudo minha tia no salão, atendo as clientes e marco horário.</p>
+            <textarea id="vivencias" name="vivencias" rows="5" maxlength="1500" aria-describedby="vivencias-ex vivencias-erro"></textarea>
+            <p class="contador" id="vivencias-conta" aria-hidden="true"></p>
+            <p class="erro" id="vivencias-erro"></p>
+          </div>
+          <div class="campo">
+            <label for="voluntariado">Já ajudou em algum projeto, grupo ou na sua comunidade?</label>
+            <p class="exemplo" id="voluntariado-ex">Organizei a arrecadação de alimentos da minha rua.</p>
+            <textarea id="voluntariado" name="voluntariado" rows="3" maxlength="1500" aria-describedby="voluntariado-ex voluntariado-erro"></textarea>
+            <p class="contador" id="voluntariado-conta" aria-hidden="true"></p>
+            <p class="erro" id="voluntariado-erro"></p>
+          </div>
+          <div class="campo">
+            <label for="oficinas">Fez algum curso ou oficina? Onde?</label>
+            <p class="exemplo" id="oficinas-ex">Curso de informática no CRAS.</p>
+            <textarea id="oficinas" name="oficinas" rows="2" maxlength="1000" aria-describedby="oficinas-ex oficinas-erro"></textarea>
+            <p class="contador" id="oficinas-conta" aria-hidden="true"></p>
+            <p class="erro" id="oficinas-erro"></p>
+          </div>
+        </fieldset>
+
+        <p class="alerta" id="form-erro" role="alert" tabindex="-1"></p>
+
+        <div class="navegacao">
+          <button type="button" class="botao secundario" id="anterior">Voltar</button>
+          <button type="button" class="botao principal" id="proximo">Continuar</button>
+          <button type="submit" class="botao principal" id="gerar" hidden>Gerar meu currículo</button>
+        </div>
+        <button type="button" class="link recomecar">Começar de novo</button>
+      </div>
+    </form>
+
+    <!-- RF09: espera da geração -->
+    <section id="tela-gerando" class="tela" hidden aria-labelledby="titulo-gerando">
+      <div class="miolo gerando">
+        <div class="folha-anim" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <h1 id="titulo-gerando">Montando seu currículo</h1>
+        <p class="espera" id="espera" role="status" aria-live="polite"></p>
+        <p class="dica">Pode levar até um minuto e meio. Não feche esta página.</p>
+      </div>
+    </section>
+
+    <!-- RF10, RF11: revisão antes de exportar (RN10) -->
+    <section id="tela-revisao" class="tela" hidden aria-labelledby="titulo-revisao">
+      <div class="miolo">
+        <h1 id="titulo-revisao">Pronto! Agora confere.</h1>
+        <p class="nota">Toque em qualquer texto da folha para corrigir. Se aparecer algo que você não fez, apague: currículo bom é currículo verdadeiro.</p>
+
+        <div class="abas" role="tablist" aria-label="Resultado">
+          <button type="button" role="tab" id="aba-cv" aria-controls="painel-cv" aria-selected="true">Currículo</button>
+          <button type="button" role="tab" id="aba-entrevista" aria-controls="painel-entrevista" aria-selected="false" tabindex="-1">Entrevista</button>
+        </div>
+
+        <div id="painel-cv" role="tabpanel" aria-labelledby="aba-cv">
+          <article class="folha" aria-label="Seu currículo">
+            <header class="folha-topo">
+              <p class="folha-nome" id="folha-nome"></p>
+              <p class="folha-contato" id="folha-contato"></p>
+            </header>
+            <div id="cv"></div>
+          </article>
+        </div>
+
+        <div id="painel-entrevista" role="tabpanel" aria-labelledby="aba-entrevista" hidden>
+          <p class="nota">Perguntas que costumam aparecer, com um jeito de responder usando o que você contou. Treine em voz alta.</p>
+          <ol class="perguntas" id="entrevista"></ol>
+          <p class="ok" id="entrevista-ok" role="status" aria-live="polite"></p>
+          <button type="button" class="botao secundario" id="copiar-entrevista">Copiar orientações</button>
+        </div>
+
+        <div class="acoes-fixas">
+          <p class="alerta" id="revisao-erro" role="alert"></p>
+          <p class="ok" id="revisao-ok" role="status" aria-live="polite"></p>
+          <div class="acoes-botoes">
+            <button type="button" class="botao principal" id="baixar">Baixar PDF</button>
+            <button type="button" class="botao secundario" id="copiar">Copiar currículo</button>
+          </div>
+        </div>
+
+        <div class="rodape-revisao">
+          <button type="button" class="link" id="voltar">Voltar e mudar o que contei</button>
+          <button type="button" class="link recomecar">Começar de novo</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="miolo">Projeto de extensão da UCSAL · Tecnologias e Inteligências Artificiais · 2026</div>
+  </footer>
+</body>
+</html>

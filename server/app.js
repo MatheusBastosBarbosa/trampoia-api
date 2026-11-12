@@ -34,6 +34,11 @@ function erroDaApi(err, signal) {
     return { codigo: "E06", status: 502 };
   }
   if (err instanceof Anthropic.APIError) return { codigo: "E06", status: 502 };
+  // Sem ANTHROPIC_API_KEY o SDK lança um Error comum, antes de qualquer chamada.
+  if (/authentication method/i.test(err?.message ?? "")) {
+    registrar({ rota: "/api/gerar", configuracao: true, problema: "ANTHROPIC_API_KEY ausente no .env" });
+    return { codigo: "E06", status: 503 };
+  }
   return null;
 }
 

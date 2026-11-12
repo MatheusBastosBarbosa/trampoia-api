@@ -139,3 +139,14 @@ test("pdf: identificação inválida dá E01", async () => {
   assert.equal(r.status, 400);
   assert.ok((await r.json()).campos["identificacao.escola"]);
 });
+
+test("front: a página sai do mesmo servidor, sem script de terceiros (RNF07)", async () => {
+  const r = await fetch(base + "/");
+  assert.equal(r.status, 200);
+  const html = await r.text();
+  assert.match(html, /<title>TrampoIA<\/title>/);
+  assert.equal(/<script[^>]+src="https?:/.test(html), false);
+  for (const arquivo of ["/app.js", "/estilo.css"]) {
+    assert.equal((await fetch(base + arquivo)).status, 200, arquivo);
+  }
+});
